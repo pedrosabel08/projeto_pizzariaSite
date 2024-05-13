@@ -25,6 +25,10 @@ td {
     padding: 8px;
 }
 
+td:hover {
+    background-color: aqua;
+}
+
 th {
     background-color: #f2f2f2;
 }
@@ -33,4 +37,43 @@ footer {
     position: absolute;
     bottom: 0;
     margin-left: 15px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+}
+
+main .tabela {
+    grid-column: 1;
+}
+
+main .inserir {
+    grid-column: 2;
+}
+
+main .inserir h2 {
+    text-align: left;
+}
+
+main .inserir ul {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    padding: 0;
+    list-style-type: none;
+}
+
+main .inserir input {
+    width: 30%;
+    margin: 15px 0;
+    padding: 5px;
+}
+
+main .inserir label {
+    font-size: 18px;
+}
+
+.selecionada {
+    background-color: #000000;
 }
