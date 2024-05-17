@@ -96,7 +96,7 @@ $conn->close();
 
                 </ul>
             </form>
-            <form id="formExcluirProduto" action="excluir_produto.php" method="POST">
+            <form id="formExcluirProduto" action="excluir.php" method="POST">
                 <input type="hidden" name="idprodutos" id="idProdutoExcluir">
                 <button type="button" id="botaoExcluir">Excluir Item</button>
             </form>

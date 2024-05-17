@@ -9,7 +9,6 @@ body {
 
 h2 {
     text-align: center;
-    padding: 10px;
 }
 
 table {
@@ -33,47 +32,29 @@ th {
     background-color: #f2f2f2;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    margin-left: 15px;
-}
-
 main {
     display: grid;
     grid-template-columns: 1fr 500px;
+    gap: 50px;
+    padding: 10px;
 }
 
-main .tabela {
+main .pizzas {
     grid-column: 1;
 }
 
-main .inserir {
+main .addPizza {
     grid-column: 2;
 }
 
-main .inserir h2 {
-    text-align: left;
+.addPizza form .Nome, #ingredients-container, .ingredient-row{
+    padding-bottom: 10px;
 }
 
-main .inserir ul {
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    padding: 0;
-    list-style-type: none;
-}
-
-main .inserir input {
-    width: 30%;
-    margin: 15px 0;
+form input, label, select, button {
     padding: 5px;
 }
 
-main .inserir label {
-    font-size: 18px;
-}
-
-.selecionada {
-    background-color: #ffbb00;
+form input#pizza_name{
+    width: 50%;
 }
