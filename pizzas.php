@@ -1,7 +1,6 @@
 <?php
 include ("conexao.php");
 
-// Consulta SQL para obter as pizzas e seus ingredientes
 $sql = "SELECT p.idpizzas, p.nomePizza, pr.nomeProduto, pp.quantidade 
         FROM pizzas AS p
         LEFT JOIN pizzas_produtos AS pp ON p.idpizzas = pp.pizza_id
@@ -16,6 +15,7 @@ if ($result->num_rows > 0) {
         $pizza_id = $row['idpizzas'];
         if (!isset($pizzas[$pizza_id])) {
             $pizzas[$pizza_id] = [
+                'idpizzas' => $row['idpizzas'],
                 'nomePizza' => $row['nomePizza'],
                 'ingredientes' => []
             ];
@@ -54,8 +54,8 @@ $conn->close();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($pizzas as $pizza): ?>
-                        <tr>
+                    <?php foreach ($pizzas as $pizzaId => $pizza): ?>
+                        <tr class="linha-tabela" data-id="<?php echo htmlspecialchars($pizzaId); ?>">
                             <td><?php echo htmlspecialchars($pizza['nomePizza']); ?></td>
                             <td>
                                 <?php if (count($pizza['ingredientes']) > 0): ?>
@@ -86,13 +86,11 @@ $conn->close();
                     <div class="ingredient-row">
                         <select name="ingredients[]" class="ingredient-select">
                             <?php
-                            // Conexão com o banco de dados
                             $conn = new mysqli($servername, $username, $password, $dbname, $port);
                             if ($conn->connect_error) {
                                 die("Conexão falhou: " . $conn->connect_error);
                             }
 
-                            // Busca ingredientes
                             $sql = "SELECT idprodutos, nomeProduto FROM produtos";
                             $result = $conn->query($sql);
 
@@ -110,8 +108,14 @@ $conn->close();
                         <button type="button" class="remove-ingredient">Remover</button>
                     </div>
                 </div>
-                <button type="button" id="add-ingredient">Adicionar Ingrediente</button>
-                <button type="submit">Salvar Pizza</button>
+                <div class="buttons">
+                    <button type="button" id="add-ingredient">Adicionar Ingrediente</button>
+                    <button type="submit">Salvar Pizza</button>
+                </div>
+            </form>
+            <form id="formExcluirPizza" action="excluirPizza.php" method="POST">
+                <input type="hidden" name="idpizzas" id="idPizzaExcluir">
+                <button type="button" id="botaoExcluir">Excluir Item</button>
             </form>
         </div>
     </main>

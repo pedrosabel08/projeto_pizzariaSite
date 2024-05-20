@@ -1,6 +1,6 @@
 <?php
 
-include("conexao.php");
+include ("conexao.php");
 
 $pizza_name = $_POST['pizza_name'];
 $ingredients = $_POST['ingredients'];
@@ -26,6 +26,5 @@ for ($i = 0; $i < count($ingredients); $i++) {
 $stmt_ingredient->close();
 $conn->close();
 
-header("Location: sucesso.html");
+echo "<script>alert('Pizza cadastrada com sucesso!');window.location.href='pizzas.php';</script>";
 exit();
-?>

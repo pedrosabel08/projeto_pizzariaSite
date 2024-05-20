@@ -48,30 +48,59 @@ main .tabela {
     grid-column: 1;
 }
 
-main .inserir {
+.inserir {
     grid-column: 2;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #ffffff;
 }
 
-main .inserir h2 {
-    text-align: left;
+.inserir h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-main .inserir ul {
-    display: flex;
-    align-items: left;
-    flex-direction: column;
+.inserir ul {
+    list-style: none;
     padding: 0;
-    list-style-type: none;
+    width: 100%;
 }
 
-main .inserir input {
-    width: 30%;
-    margin: 15px 0;
-    padding: 5px;
+.inserir li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-main .inserir label {
-    font-size: 18px;
+.inserir label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.inserir input,
+.inserir button {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.inserir button {
+    cursor: pointer;
+    background-color: #388ae0;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.inserir button:hover {
+    background-color: #0056b3;
 }
 
 .selecionada {

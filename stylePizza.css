@@ -36,7 +36,6 @@ main {
     display: grid;
     grid-template-columns: 1fr 500px;
     gap: 50px;
-    padding: 10px;
 }
 
 main .pizzas {
@@ -45,16 +44,75 @@ main .pizzas {
 
 main .addPizza {
     grid-column: 2;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #ffffff;
 }
 
 .addPizza form .Nome, #ingredients-container, .ingredient-row{
     padding-bottom: 10px;
 }
 
-form input, label, select, button {
+.Nome {
+    margin-bottom: 10px;
+}
+
+.addPizza input, label, select, button {
     padding: 5px;
+}
+
+.addPizza .ingredient-select {
+    width: 30%;
 }
 
 form input#pizza_name{
     width: 50%;
+}
+
+.addPizza #add-ingredient {
+    margin-bottom: 20px;
+}
+
+.addPizza .ingredient-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.addPizza .ingredient-select,
+.addPizza .ingredient-quantity {
+    margin-right: 10px;
+}
+
+.addPizza .remove-ingredient {
+    background-color: #e3342f;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.addPizza .remove-ingredient:hover {
+    background-color: #cc1f1a;
+}
+
+.addPizza .buttons button {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%; 
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #388ae0;
+    border: none;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.selecionada {
+    background-color: #e3342f;
 }
