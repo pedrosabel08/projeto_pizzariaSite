@@ -1,7 +1,10 @@
 <?php
 include 'conexao.php';
 
-$sql = "SELECT * FROM produtos";
+$sql = "SELECT produtos.idprodutos, produtos.nomeProduto, produtos.quantidade, unidademedida.nome as unidadeMedida, produtos.validade 
+        FROM produtos 
+        INNER JOIN unidademedida ON produtos.unidadeMedida = unidademedida.idunidadeMedida 
+        ORDER BY produtos.nomeProduto ASC;";
 $result = $conn->query($sql);
 
 $data = array();
@@ -11,13 +14,23 @@ if ($result->num_rows > 0) {
     }
 }
 
+$sql_unidades = "SELECT idunidadeMedida, nome FROM unidademedida";
+$result_unidades = $conn->query($sql_unidades);
+
+$unidades = array();
+if ($result_unidades->num_rows > 0) {
+    while ($row = $result_unidades->fetch_assoc()) {
+        $unidades[] = $row;
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomeProduto = $_POST['nomeProduto'];
     $quantidade = $_POST['quantidade'];
-
+    $unidadeMedida = $_POST['unidadeMedida'];
     $validadeFormatada = date('Y-m-d', strtotime($_POST['validade']));
 
-    $sql = "INSERT INTO produtos (nomeProduto, quantidade, validade) VALUES ('$nomeProduto', '$quantidade', '$validadeFormatada')";
+    $sql = "INSERT INTO produtos (nomeProduto, quantidade, unidadeMedida, validade) VALUES ('$nomeProduto', '$quantidade', '$unidadeMedida', '$validadeFormatada')";
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Novo produto inserido com sucesso!');window.location.href='estoque.php';</script>";
@@ -26,37 +39,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 $conn->close();
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Estoque</title>
 </head>
-
 <body>
-
     <main>
         <div class="tabela">
-
             <h2>Estoque</h2>
             <table>
                 <tr>
-                    <th>ID</th>
                     <th>Nome do Produto</th>
                     <th>Quantidade</th>
+                    <th>Unidade Medida</th>
                     <th>Validade</th>
                 </tr>
                 <?php foreach ($data as $produto): ?>
                     <tr class="linha-tabela" data-id="<?php echo $produto['idprodutos']; ?>">
-                        <td><?php echo $produto['idprodutos']; ?></td>
                         <td><?php echo $produto['nomeProduto']; ?></td>
                         <td><?php echo $produto['quantidade']; ?></td>
+                        <td><?php echo $produto['unidadeMedida']; ?></td>
                         <td><?php echo $produto['validade']; ?></td>
                     </tr>
                 <?php endforeach; ?>
@@ -64,7 +72,6 @@ $conn->close();
         </div>
         <div class="inserir">
             <h2>Inserir produto: </h2>
-
             <form action="estoque.php" method="POST">
                 <ul>
                     <li>
@@ -73,7 +80,18 @@ $conn->close();
                     </li>
                     <li>
                         <label for="quantidade">Quantidade: </label>
-                        <input type="text" name="quantidade" id="quantidade">
+                        <input type="number" name="quantidade" id="quantidade">
+                    </li>
+                    <li>
+                    <label for="unidadeMedida">Unidade de Medida: </label>
+                        <select name="unidadeMedida" id="unidadeMedida" required>
+                            <option value="">Selecione</option>
+                            <?php foreach ($unidades as $unidade): ?>
+                                <option value="<?php echo $unidade['idunidadeMedida']; ?>">
+                                    <?php echo $unidade['nome']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </li>
                     <li>
                         <label for="validade">Validade: </label>
@@ -82,23 +100,18 @@ $conn->close();
                     <li>
                         <button type="submit">Inserir Produto</button>
                     </li>
-
                 </ul>
             </form>
             <form id="formExcluirProduto" action="excluir.php" method="POST">
                 <input type="hidden" name="idprodutos" id="idProdutoExcluir">
                 <button type="button" id="botaoExcluir">Excluir Item</button>
             </form>
-
         </div>
     </main>
     <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
-
     <footer>
-        <p>&copy; sexo</p>
+        <p>&copy; Pedro e amigos</p>
     </footer>
-
     <script src="script.js"></script>
 </body>
-
 </html>

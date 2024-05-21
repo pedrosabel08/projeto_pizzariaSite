@@ -59,7 +59,7 @@ main .addPizza {
     margin-bottom: 10px;
 }
 
-.addPizza input, label, select, button {
+.addPizza input, label, select {
     padding: 5px;
 }
 
@@ -102,7 +102,6 @@ form input#pizza_name{
 .addPizza .buttons button {
     padding: 8px;
     font-size: 16px;
-    border: 1px solid black;
     border-radius: 5px;
     width: 100%; 
     box-sizing: border-box;
@@ -113,6 +112,18 @@ form input#pizza_name{
     font-family: "Ubuntu", sans-serif;
 }
 
+.addPizza button#botaoExcluir {
+    padding: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 20%;
+    background-color: #cc1f1a;
+    border: none;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+
+}
 .selecionada {
     background-color: #e3342f;
 }
