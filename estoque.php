@@ -43,15 +43,18 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Estoque</title>
 </head>
+
 <body>
     <main>
         <div class="tabela">
+            <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Estoque</h2>
             <table>
                 <tr>
@@ -83,7 +86,7 @@ $conn->close();
                         <input type="number" name="quantidade" id="quantidade">
                     </li>
                     <li>
-                    <label for="unidadeMedida">Unidade de Medida: </label>
+                        <label for="unidadeMedida">Unidade de Medida: </label>
                         <select name="unidadeMedida" id="unidadeMedida" required>
                             <option value="">Selecione</option>
                             <?php foreach ($unidades as $unidade): ?>
@@ -108,10 +111,10 @@ $conn->close();
             </form>
         </div>
     </main>
-    <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
     <footer>
         <p>&copy; Pedro e amigos</p>
     </footer>
     <script src="script.js"></script>
 </body>
+
 </html>

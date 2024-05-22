@@ -45,6 +45,7 @@ $conn->close();
 <body>
     <main>
         <div class="pizzas">
+            <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Pizzas Cadastradas</h2>
             <table border="1">
                 <thead>
