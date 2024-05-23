@@ -5,10 +5,12 @@ include ("conexao.php");
 $pizza_name = $_POST['pizza_name'];
 $ingredients = $_POST['ingredients'];
 $quantities = $_POST['quantities'];
+$tipoPizza = $_POST['tipoPizza'];
 
-$sql_pizza = "INSERT INTO pizzas (nomePizza) VALUES (?)";
+
+$sql_pizza = "INSERT INTO pizzas (nomePizza, tipoPizza) VALUES (?,?)";
 $stmt_pizza = $conn->prepare($sql_pizza);
-$stmt_pizza->bind_param("s", $pizza_name);
+$stmt_pizza->bind_param("ss", $pizza_name, $tipoPizza);
 $stmt_pizza->execute();
 $pizza_id = $stmt_pizza->insert_id;
 $stmt_pizza->close();

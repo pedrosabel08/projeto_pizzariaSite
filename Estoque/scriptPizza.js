@@ -20,12 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ingredientQuantity.placeholder = 'Quantidade';
         ingredientQuantity.min = '1';
     
-        const unitInput = document.createElement('input');
-        unitInput.type = 'text';
-        unitInput.name = 'units[]'; // Nome do campo para a unidade de medida
-        unitInput.className = 'unit-input';
-        unitInput.placeholder = 'Unidade de Medida'; // Placeholder para a unidade de medida
-    
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.className = 'remove-ingredient';
@@ -36,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
         ingredientRow.appendChild(ingredientSelect);
         ingredientRow.appendChild(ingredientQuantity);
-        ingredientRow.appendChild(unitInput); // Adicionando o campo de entrada para a unidade de medida
         ingredientRow.appendChild(removeButton);
     
         return ingredientRow;

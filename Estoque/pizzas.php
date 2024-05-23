@@ -86,6 +86,10 @@ $conn->close();
                 <div class="Nome">
                     <label for="pizza_name">Nome da Pizza:</label>
                     <input type="text" id="pizza_name" name="pizza_name" required>
+                    <select id="tipoPizza" name="tipoPizza">
+                        <option value="salgada">Salgada</option>
+                        <option value="doce">Doce</option>
+                    </select>
                 </div>
                 <div id="ingredients-container">
                     <div class="ingredient-row">
