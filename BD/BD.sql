@@ -312,6 +312,7 @@ DELIMITER ;
 DELIMITER $$
 USE `bd_pizzaria`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inserirUnidadeMedida`() RETURNS int(11)
+	DETERMINISTIC
 BEGIN
 	INSERT INTO unidademedida (idunidademedida, nome) VALUES (1, 'Gramas');
 	INSERT INTO unidademedida (idunidademedida, nome) VALUES (2, 'Litros');
