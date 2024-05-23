@@ -46,8 +46,14 @@ main .pizzas {
 }
 
 table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
+}
+
+.table-wrapper {
+    max-height: 713px;
+    overflow-y: auto;
+    width: 100%;
 }
 
 .pizzas input {
@@ -143,16 +149,28 @@ form input#pizza_name {
 .addPizza button#botaoExcluir {
     padding: 8px;
     margin-top: 10px;
-    font-size: 12px;
     border-radius: 5px;
     width: 20%;
-    background-color: #cc1f1a;
+    background-color: #e3342f;
     border: none;
     color: white;
     font-family: "Ubuntu", sans-serif;
+}
+
+.addPizza button#botaoExcluir:hover {
+    background-color: #cc1f1a;
+    cursor: pointer;
 }
 
 .selecionada {
     background-color: #e3342f;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-left: 10px;
+    background-color: #000000;
+    color: #ffffff;
+}

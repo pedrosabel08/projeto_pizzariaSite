@@ -50,8 +50,14 @@ main .tabela {
 }
 
 table {
-    width: 95%;
+    width: 100%;
     border-collapse: collapse;
+}
+
+.table-wrapper {
+    max-height: 713px;
+    overflow-y: auto;
+    width: 100%;
 }
     
 .tabela input {
@@ -107,7 +113,7 @@ table {
 }
 
 .inserir input,
-.inserir button, .inserir select {
+.inserir select {
     padding: 8px;
     font-size: 16px;
     border: 1px solid black;
@@ -116,21 +122,49 @@ table {
     box-sizing: border-box;
 }
 
-.inserir button {
-    cursor: pointer;
+
+.inserir .buttons button {
     background-color: #388ae0;
     border: none;
     color: white;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
     font-family: "Ubuntu", sans-serif;
 }
 
-.inserir button:hover {
+.inserir .buttons button:hover {
     background-color: #0056b3;
+    cursor: pointer;
+}
+
+.inserir button#botaoExcluir {
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 25%;
+    background-color: #e3342f;
+    border: none;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+} 
+
+.inserir button#botaoExcluir:hover {
+    background-color: #cc1f1a;
+    cursor: pointer;
 }
 
 .selecionada {
     background-color: #ffbb00;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-left: 10px;
+    background-color: #000000;
+    color: #ffffff;
+}

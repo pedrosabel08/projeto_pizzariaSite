@@ -339,6 +339,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `inserir_ingredientes_salgada`(IN pi
 BEGIN
     INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 171, 100);
     INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 176, 100);
+	INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 175, 10);
+
 END$$
 
 DELIMITER ;

@@ -76,3 +76,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function filterTable() {
+    const input = document.getElementById('filterInput');
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById('tabelaPizzas');
+    const rows = table.querySelectorAll('tbody tr');
+        
+    for (const row of rows) {
+        const tds = row.getElementsByTagName('td');
+        let display = false;
+        
+        if (tds[0].textContent.toLowerCase().indexOf(filter) > -1) {
+            display = true;
+        }
+        
+        row.style.display = display ? '' : 'none';
+    }
+}

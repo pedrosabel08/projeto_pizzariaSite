@@ -57,22 +57,24 @@ $conn->close();
             <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Estoque</h2>
             <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filtrar por:">
-            <table id="tabelaEstoque">
-                <tr>
-                    <th>Nome do Produto</th>
-                    <th>Quantidade</th>
-                    <th class="unidadeMedida">Unidade Medida</th>
-                    <th>Validade</th>
-                </tr>
-                <?php foreach ($data as $produto): ?>
-                    <tr class="linha-tabela" data-id="<?php echo $produto['idprodutos']; ?>">
-                        <td><?php echo $produto['nomeProduto']; ?></td>
-                        <td><?php echo $produto['quantidade']; ?></td>
-                        <td><?php echo $produto['unidadeMedida']; ?></td>
-                        <td><?php echo $produto['validade']; ?></td>
+            <div class="table-wrapper">
+                <table id="tabelaEstoque">
+                    <tr>
+                        <th>Nome do Produto</th>
+                        <th>Quantidade</th>
+                        <th class="unidadeMedida">Unidade Medida</th>
+                        <th>Validade</th>
                     </tr>
-                <?php endforeach; ?>
-            </table>
+                    <?php foreach ($data as $produto): ?>
+                        <tr class="linha-tabela" data-id="<?php echo $produto['idprodutos']; ?>">
+                            <td><?php echo $produto['nomeProduto']; ?></td>
+                            <td><?php echo $produto['quantidade']; ?></td>
+                            <td><?php echo $produto['unidadeMedida']; ?></td>
+                            <td><?php echo $produto['validade']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         </div>
         <div class="inserir">
             <h2>Inserir produto: </h2>
@@ -101,10 +103,10 @@ $conn->close();
                         <label for="validade">Validade: </label>
                         <input type="date" name="validade" id="validade">
                     </li>
-                    <li>
-                        <button type="submit">Inserir Produto</button>
-                    </li>
                 </ul>
+                <div class="buttons">
+                    <button type="submit">Inserir Produto</button>
+                </div>
             </form>
             <form id="formExcluirProduto" action="excluir.php" method="POST">
                 <input type="hidden" name="idprodutos" id="idProdutoExcluir">

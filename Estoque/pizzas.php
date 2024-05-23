@@ -51,34 +51,36 @@ $conn->close();
             <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Pizzas Cadastradas</h2>
             <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filtrar por:">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome da Pizza</th>
-                        <th>Ingredientes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pizzas as $pizzaId => $pizza): ?>
-                        <tr class="linha-tabela" data-id="<?php echo htmlspecialchars($pizzaId); ?>">
-                            <td><?php echo htmlspecialchars($pizza['nomePizza']); ?></td>
-                            <td>
-                                <?php if (count($pizza['ingredientes']) > 0): ?>
-                                    <ul>
-                                        <?php foreach ($pizza['ingredientes'] as $ingrediente): ?>
-                                            <li>
-                                                <?php echo htmlspecialchars($ingrediente['nomeProduto']) . " - " . htmlspecialchars($ingrediente['quantidade']) . " " . htmlspecialchars($ingrediente['unidadeMedida']); ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php else: ?>
-                                    Nenhum ingrediente cadastrado.
-                                <?php endif; ?>
-                            </td>
+            <div class="table-wrapper">
+                <table id="tabelaPizzas">
+                    <thead>
+                        <tr>
+                            <th>Nome da Pizza</th>
+                            <th>Ingredientes</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($pizzas as $pizzaId => $pizza): ?>
+                            <tr class="linha-tabela" data-id="<?php echo htmlspecialchars($pizzaId); ?>">
+                                <td><?php echo htmlspecialchars($pizza['nomePizza']); ?></td>
+                                <td>
+                                    <?php if (count($pizza['ingredientes']) > 0): ?>
+                                        <ul>
+                                            <?php foreach ($pizza['ingredientes'] as $ingrediente): ?>
+                                                <li>
+                                                    <?php echo htmlspecialchars($ingrediente['nomeProduto']) . " - " . htmlspecialchars($ingrediente['quantidade']) . " " . htmlspecialchars($ingrediente['unidadeMedida']); ?>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        Nenhum ingrediente cadastrado.
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="addPizza">
             <h2>Adicionar Pizza</h2>
@@ -128,7 +130,10 @@ $conn->close();
             </form>
         </div>
     </main>
-    <script src="scriptPizza.js"></script>
+    <footer>
+        <p>&copy; Arthur, Pedro e Vitor</p>
+    </footer>
 </body>
+<script src="scriptPizza.js"></script>
 
 </html>
