@@ -56,11 +56,12 @@ $conn->close();
         <div class="tabela">
             <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Estoque</h2>
-            <table>
+            <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filtrar por:">
+            <table id="tabelaEstoque">
                 <tr>
                     <th>Nome do Produto</th>
                     <th>Quantidade</th>
-                    <th>Unidade Medida</th>
+                    <th class="unidadeMedida">Unidade Medida</th>
                     <th>Validade</th>
                 </tr>
                 <?php foreach ($data as $produto): ?>
@@ -112,7 +113,7 @@ $conn->close();
         </div>
     </main>
     <footer>
-        <p>&copy; Pedro e amigos</p>
+        <p>&copy; Arthur, Pedro e Vitor</p>
     </footer>
     <script src="script.js"></script>
 </body>

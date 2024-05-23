@@ -5,21 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function createIngredientRow() {
         const ingredientRow = document.createElement('div');
         ingredientRow.className = 'ingredient-row';
-
+    
         const ingredientSelect = document.createElement('select');
         ingredientSelect.name = 'ingredients[]';
         ingredientSelect.className = 'ingredient-select';
-
+    
         const firstSelect = document.querySelector('.ingredient-select');
         ingredientSelect.innerHTML = firstSelect.innerHTML;
-
+    
         const ingredientQuantity = document.createElement('input');
         ingredientQuantity.type = 'number';
         ingredientQuantity.name = 'quantities[]';
         ingredientQuantity.className = 'ingredient-quantity';
         ingredientQuantity.placeholder = 'Quantidade';
         ingredientQuantity.min = '1';
-
+    
+        const unitInput = document.createElement('input');
+        unitInput.type = 'text';
+        unitInput.name = 'units[]'; // Nome do campo para a unidade de medida
+        unitInput.className = 'unit-input';
+        unitInput.placeholder = 'Unidade de Medida'; // Placeholder para a unidade de medida
+    
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.className = 'remove-ingredient';
@@ -27,11 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
         removeButton.addEventListener('click', () => {
             ingredientRow.remove();
         });
-
+    
         ingredientRow.appendChild(ingredientSelect);
         ingredientRow.appendChild(ingredientQuantity);
+        ingredientRow.appendChild(unitInput); // Adicionando o campo de entrada para a unidade de medida
         ingredientRow.appendChild(removeButton);
-
+    
         return ingredientRow;
     }
 

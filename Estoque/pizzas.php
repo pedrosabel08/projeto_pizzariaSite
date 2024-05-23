@@ -1,11 +1,13 @@
 <?php
 include ("conexao.php");
 
-$sql = "SELECT p.idpizzas, p.nomePizza, pr.nomeProduto, pp.quantidade 
-        FROM pizzas AS p
-        LEFT JOIN pizzas_produtos AS pp ON p.idpizzas = pp.pizza_id
-        LEFT JOIN produtos AS pr ON pp.produto_id = pr.idprodutos
-        ORDER BY p.idpizzas, pr.nomeProduto";
+$sql = "SELECT p.idpizzas, p.nomePizza, pr.nomeProduto, pp.quantidade, um.nome 
+FROM pizzas AS p
+LEFT JOIN pizzas_produtos AS pp ON p.idpizzas = pp.pizza_id
+LEFT JOIN produtos AS pr ON pp.produto_id = pr.idprodutos
+LEFT JOIN unidademedida as um on pr.unidadeMedida = um.idunidadeMedida
+ORDER BY p.idpizzas, pr.nomeProduto";
+
 
 $result = $conn->query($sql);
 
@@ -23,7 +25,8 @@ if ($result->num_rows > 0) {
         if ($row['nomeProduto']) {
             $pizzas[$pizza_id]['ingredientes'][] = [
                 'nomeProduto' => $row['nomeProduto'],
-                'quantidade' => $row['quantidade']
+                'quantidade' => $row['quantidade'],
+                'unidadeMedida' => $row['nome']
             ];
         }
     }
@@ -47,7 +50,8 @@ $conn->close();
         <div class="pizzas">
             <button class="btn" onclick="window.location.href='produtos.html'">Voltar</button>
             <h2>Pizzas Cadastradas</h2>
-            <table border="1">
+            <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Filtrar por:">
+            <table>
                 <thead>
                     <tr>
                         <th>Nome da Pizza</th>
@@ -63,7 +67,7 @@ $conn->close();
                                     <ul>
                                         <?php foreach ($pizza['ingredientes'] as $ingrediente): ?>
                                             <li>
-                                                <?php echo htmlspecialchars($ingrediente['nomeProduto']) . " - " . htmlspecialchars($ingrediente['quantidade']); ?>
+                                                <?php echo htmlspecialchars($ingrediente['nomeProduto']) . " - " . htmlspecialchars($ingrediente['quantidade']) . " " . htmlspecialchars($ingrediente['unidadeMedida']); ?>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
@@ -92,7 +96,7 @@ $conn->close();
                                 die("Conexão falhou: " . $conn->connect_error);
                             }
 
-                            $sql = "SELECT idprodutos, nomeProduto FROM produtos";
+                            $sql = "SELECT idprodutos, nomeProduto FROM produtos ORDER BY nomeProduto asc";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {

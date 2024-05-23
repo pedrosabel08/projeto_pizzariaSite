@@ -32,3 +32,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function filterTable() {
+    const input = document.getElementById('filterInput');
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById('tabelaEstoque');
+    const trs = table.getElementsByTagName('tr');
+    
+    for (let i = 1; i < trs.length; i++) {
+        const tds = trs[i].getElementsByTagName('td');
+        let display = false;
+        
+        if (tds[0].textContent.toLowerCase().indexOf(filter) > -1) {
+            display = true;
+        }
+        
+        trs[i].style.display = display ? '' : 'none';
+    }
+}

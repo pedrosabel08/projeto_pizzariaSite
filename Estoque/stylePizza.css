@@ -4,17 +4,12 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Ubuntu", sans-serif;
-
 }
 
-h2 {
+.pizzas h2 {
     text-align: center;
-}
-
-table {
-    border-collapse: collapse;
-    width: 95%;
-    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
 }
 
 th,
@@ -35,23 +30,56 @@ th {
 main {
     display: grid;
     grid-template-columns: 1fr 500px;
-    gap: 50px;
 }
 
 main .pizzas {
     grid-column: 1;
 }
 
-main .addPizza {
+.pizzas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+.pizzas input {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.pizzas button {
+    width: 80px;
+    padding: 5px;
+    margin-left: 3px;
+    margin-top: 3px;
+    border-radius: 5px;
+    font-family: "Ubuntu", sans-serif;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+}
+
+.addPizza {
     grid-column: 2;
     padding: 20px;
-    border: 1px solid #000000;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: #ffffff;
 }
 
-.addPizza form .Nome, #ingredients-container, .ingredient-row{
+.addPizza form .Nome, #ingredients-container, .ingredient-row {
     padding-bottom: 10px;
 }
 
@@ -67,7 +95,7 @@ main .addPizza {
     width: 30%;
 }
 
-form input#pizza_name{
+form input#pizza_name {
     width: 50%;
 }
 
@@ -103,7 +131,7 @@ form input#pizza_name{
     padding: 8px;
     font-size: 16px;
     border-radius: 5px;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
     cursor: pointer;
     background-color: #388ae0;
@@ -122,19 +150,9 @@ form input#pizza_name{
     border: none;
     color: white;
     font-family: "Ubuntu", sans-serif;
-
 }
+
 .selecionada {
     background-color: #e3342f;
 }
 
-main button {
-    width: 80px;
-    padding: 5px;
-    margin-left: 3px;
-    margin-top: 3px;
-    font-family: "Ubuntu", sans-serif;
-    color: white;
-    background-color: #000000;
-    cursor: pointer;
-}

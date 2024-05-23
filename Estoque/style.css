@@ -4,18 +4,12 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Ubuntu", sans-serif;
-
 }
 
-h2 {
+.tabela h2 {
     text-align: center;
     padding: 10px;
-}
-
-table {
-    border-collapse: collapse;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 th,
@@ -23,6 +17,10 @@ td {
     border: 1px solid #000000;
     text-align: left;
     padding: 8px;
+}
+
+th.unidadeMedida {
+    width: 10%;
 }
 
 tr:hover {
@@ -33,18 +31,50 @@ th {
     background-color: #f2f2f2;
 }
 
-footer {
-    margin-left: 15px;
-}
-
 main {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 400px;
 }
 
 main .tabela {
     grid-column: 1;
 }
+
+.tabela {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    width: 95%;
+    border-collapse: collapse;
+}
+    
+.tabela input {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.tabela .btn {
+    width: 80px;
+    padding: 5px;
+    margin-left: 3px;
+    margin-top: 3px;
+    border-radius: 5px;
+    font-family: "Ubuntu", sans-serif;
+    color: white;
+    background-color: #000000;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+}
+
 
 .inserir {
     grid-column: 2;
@@ -82,7 +112,7 @@ main .tabela {
     font-size: 16px;
     border: 1px solid black;
     border-radius: 5px;
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -104,13 +134,3 @@ main .tabela {
     background-color: #ffbb00;
 }
 
-main button {
-    width: 80px;
-    padding: 5px;
-    margin-left: 3px;
-    margin-top: 3px;
-    font-family: "Ubuntu", sans-serif;
-    color: white;
-    background-color: #000000;
-    cursor: pointer;
-}
