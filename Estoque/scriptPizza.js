@@ -5,21 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function createIngredientRow() {
         const ingredientRow = document.createElement('div');
         ingredientRow.className = 'ingredient-row';
-    
+
         const ingredientSelect = document.createElement('select');
         ingredientSelect.name = 'ingredients[]';
         ingredientSelect.className = 'ingredient-select';
-    
+
         const firstSelect = document.querySelector('.ingredient-select');
         ingredientSelect.innerHTML = firstSelect.innerHTML;
-    
+
         const ingredientQuantity = document.createElement('input');
         ingredientQuantity.type = 'number';
         ingredientQuantity.name = 'quantities[]';
         ingredientQuantity.className = 'ingredient-quantity';
         ingredientQuantity.placeholder = 'Quantidade';
         ingredientQuantity.min = '1';
-    
+
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.className = 'remove-ingredient';
@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         removeButton.addEventListener('click', () => {
             ingredientRow.remove();
         });
-    
+
         ingredientRow.appendChild(ingredientSelect);
         ingredientRow.appendChild(ingredientQuantity);
         ingredientRow.appendChild(removeButton);
-    
+
         return ingredientRow;
     }
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var idPizzaSelecionada = linhaSelecionada.getAttribute("data-id");
 
             document.getElementById("idPizzaExcluir").value = idPizzaSelecionada;
-            
+
             console.log("ID da pizza a ser excluída: " + idPizzaSelecionada);
             console.log("Campo hidden valor: " + document.getElementById("idPizzaExcluir").value);
 
@@ -82,15 +82,15 @@ function filterTable() {
     const filter = input.value.toLowerCase();
     const table = document.getElementById('tabelaPizzas');
     const rows = table.querySelectorAll('tbody tr');
-        
+
     for (const row of rows) {
         const tds = row.getElementsByTagName('td');
         let display = false;
-        
+
         if (tds[0].textContent.toLowerCase().indexOf(filter) > -1) {
             display = true;
         }
-        
+
         row.style.display = display ? '' : 'none';
     }
 }

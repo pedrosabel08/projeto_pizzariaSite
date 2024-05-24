@@ -3,9 +3,9 @@ include ("conexao.php");
 
 $sql = "SELECT p.idpizzas, p.nomePizza, pr.nomeProduto, pp.quantidade, um.nome 
 FROM pizzas AS p
-LEFT JOIN pizzas_produtos AS pp ON p.idpizzas = pp.pizza_id
-LEFT JOIN produtos AS pr ON pp.produto_id = pr.idprodutos
-LEFT JOIN unidademedida as um on pr.unidadeMedida = um.idunidadeMedida
+INNER JOIN pizzas_produtos AS pp ON p.idpizzas = pp.pizza_id
+INNER JOIN produtos AS pr ON pp.produto_id = pr.idprodutos
+INNER JOIN unidademedida as um on pr.unidadeMedida = um.idunidadeMedida
 ORDER BY p.idpizzas, pr.nomeProduto";
 
 
@@ -55,6 +55,7 @@ $conn->close();
                 <table id="tabelaPizzas">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nome da Pizza</th>
                             <th>Ingredientes</th>
                         </tr>
@@ -62,6 +63,7 @@ $conn->close();
                     <tbody>
                         <?php foreach ($pizzas as $pizzaId => $pizza): ?>
                             <tr class="linha-tabela" data-id="<?php echo htmlspecialchars($pizzaId); ?>">
+                                <td><?php echo htmlspecialchars($pizza['idpizzas']); ?></td>
                                 <td><?php echo htmlspecialchars($pizza['nomePizza']); ?></td>
                                 <td>
                                     <?php if (count($pizza['ingredientes']) > 0): ?>
