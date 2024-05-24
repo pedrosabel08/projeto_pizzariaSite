@@ -1,12 +1,11 @@
 <?php
 
-include ("conexao.php");
+include("conexao.php");
 
 $pizza_name = $_POST['pizza_name'];
 $ingredients = $_POST['ingredients'];
 $quantities = $_POST['quantities'];
 $tipoPizza = $_POST['tipoPizza'];
-
 
 $sql_pizza = "INSERT INTO pizzas (nomePizza, tipoPizza) VALUES (?,?)";
 $stmt_pizza = $conn->prepare($sql_pizza);
