@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema bd_pizzaria
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bd_pizzaria` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `bd_pizzaria` DEFAULT CHARACTER SET utf8mb4;
 USE `bd_pizzaria` ;
 
 -- -----------------------------------------------------
@@ -26,9 +26,8 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas` (
   `tipoPizza` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idpizzas`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 241
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -39,9 +38,8 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`unidademedida` (
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -59,9 +57,8 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`produtos` (
     FOREIGN KEY (`unidadeMedida`)
     REFERENCES `bd_pizzaria`.`unidademedida` (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 241
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -82,9 +79,8 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas_produtos` (
     FOREIGN KEY (`produto_id`)
     REFERENCES `bd_pizzaria`.`produtos` (`idprodutos`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 957
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4;
 
 USE `bd_pizzaria` ;
 
@@ -788,39 +784,6 @@ BEGIN
 
 RETURN 1;
 END$$
-
-DELIMITER ;
-
--- -----------------------------------------------------
--- procedure inserir_ingredientes_salgada
--- -----------------------------------------------------
-
-DELIMITER $$
-USE `bd_pizzaria`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `inserir_ingredientes_salgada`(IN pizza_id INT)
-BEGIN
-    INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 1, 100);
-    INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 6, 100);
-	INSERT INTO `bd_pizzaria`.`pizzas_produtos` (pizza_id, produto_id, quantidade) VALUES (pizza_id, 5, 10);
-
-END$$
-
-DELIMITER ;
-USE `bd_pizzaria`;
-
-DELIMITER $$
-USE `bd_pizzaria`$$
-CREATE
-DEFINER=`root`@`localhost`
-TRIGGER `bd_pizzaria`.`after_pizza_insert`
-AFTER INSERT ON `bd_pizzaria`.`pizzas`
-FOR EACH ROW
-BEGIN
-    IF NEW.tipoPizza = 'salgada' THEN
-        CALL `inserir_ingredientes_salgada`(NEW.idpizzas);
-    END IF;
-END$$
-
 
 DELIMITER ;
 
