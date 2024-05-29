@@ -108,15 +108,22 @@ $conn->close();
                     <button type="submit">Inserir Produto</button>
                 </div>
             </form>
-            <form id="formExcluirProduto" action="excluir.php" method="POST">
-                <input type="hidden" name="idprodutos" id="idProdutoExcluir">
-                <button type="button" id="botaoExcluir">Excluir Item</button>
-            </form>
+            <div id="botoes">
+                <form id="formExcluirProduto" action="excluir.php" method="POST">
+                    <input type="hidden" name="idprodutos" id="idProdutoExcluir">
+                    <button type="button" id="botaoExcluir">Excluir Item</button>
+                </form>
+                <form id="formAlterarProduto" action="alterar.php" method="POST">
+                    <input type="hidden" name="idprodutos" id="idProdutoAlterar">
+                    <button type="button" id="botaoAlterar">Alterar Item</button>
+                </form>
+            </div>
         </div>
     </main>
     <footer>
         <p>&copy; Arthur, Pedro e Vitor</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 

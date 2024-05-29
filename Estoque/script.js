@@ -8,8 +8,27 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             linha.classList.add("selecionada");
-
             var idProdutoSelecionado = linha.getAttribute("data-id");
+            $.ajax({
+                type: "GET",
+                dataType: "json",  
+                url: "http://localhost:8066/projeto_pizzariaSite/Estoque/buscaLinhaAJAX.php",
+                data: { ajid: idProdutoSelecionado },  
+                success: function (response) {
+                    if (response.length > 0) {
+                        document.getElementById('nomeProduto').value = response[0].nomeProduto;  
+                        document.getElementById('quantidade').value = response[0].quantidade;  
+                        document.getElementById('unidadeMedida').value = response[0].unidadeMedida;
+                        document.getElementById('validade').value = response[0].validade;
+                    } else {
+                        console.log("Nenhum produto encontrado.");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error("Erro na requisição AJAX: " + textStatus, errorThrown);
+                }
+            });
+
             console.log("Linha selecionada: ID do produto = " + idProdutoSelecionado);
         });
     });

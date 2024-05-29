@@ -140,11 +140,20 @@ table {
     cursor: pointer;
 }
 
+#botoes{
+    display: flex;
+}
+
+#formExcluirProduto{
+    text-align: center;
+    width: 50%;
+}
+
 .inserir button#botaoExcluir {
     padding: 8px;
     margin-top: 10px;
     border-radius: 5px;
-    width: 25%;
+    width: 50%;
     background-color: #e3342f;
     border: none;
     color: white;
@@ -153,6 +162,27 @@ table {
 
 .inserir button#botaoExcluir:hover {
     background-color: #cc1f1a;
+    cursor: pointer;
+}
+
+#formAlterarProduto{
+    text-align: center;
+    width: 50%;
+}
+
+.inserir button#botaoAlterar {
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 50%;
+    background-color: #aca000;
+    border: none;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+} 
+
+.inserir button#botaoAlterar:hover {
+    background-color: #756e02;
     cursor: pointer;
 }
 
