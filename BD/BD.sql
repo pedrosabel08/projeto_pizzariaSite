@@ -896,6 +896,44 @@ END$$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- function inserirTamanho
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bd_pizzaria`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `inserirTamanho`() RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+	INSERT INTO tamanho (tamanho, preco) VALUES ('Love', 20.00);
+	INSERT INTO tamanho (tamanho, preco) VALUES ('Baby', 29.90);
+	INSERT INTO tamanho (tamanho, preco) VALUES ('Média', 58.90);
+	INSERT INTO tamanho (tamanho, preco) VALUES ('Grande', 76.90);
+	INSERT INTO tamanho (tamanho, preco) VALUES ('Gigante', 87.90);
+
+RETURN 1;
+END$$
+
+DELIMITER ;
+-- -----------------------------------------------------
+-- function inserirFormaEntrega
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `bd_pizzaria`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `inserirFormaEntrega`() RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+	INSERT INTO forma_entrega (tipo) VALUES ('Retirada');
+	INSERT INTO forma_entrega (tipo) VALUES ('Entrega');
+
+RETURN 1;
+END$$
+
+DELIMITER ;
+
+select bd_pizzaria.inserirFormaEntrega();
+select bd_pizzaria.inserirTamanho();
 select bd_pizzaria.inserirUnidadeMedida();
 select bd_pizzaria.inserirProdutos();
 select bd_pizzaria.inserirPizzas();
