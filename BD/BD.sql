@@ -896,6 +896,10 @@ END$$
 
 DELIMITER ;
 
+select bd_pizzaria.inserirUnidadeMedida();
+select bd_pizzaria.inserirProdutos();
+select bd_pizzaria.inserirPizzas();
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
