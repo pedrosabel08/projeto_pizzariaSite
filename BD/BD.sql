@@ -5,28 +5,25 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema bd_pizzaria
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema bd_pizzaria
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bd_pizzaria` DEFAULT CHARACTER SET utf8mb4;
+CREATE SCHEMA IF NOT EXISTS `bd_pizzaria` DEFAULT CHARACTER SET utf8mb4 ;
 USE `bd_pizzaria` ;
 
 -- -----------------------------------------------------
 -- Table `bd_pizzaria`.`pizzas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas` (
-  `idpizzas` INT NOT NULL AUTO_INCREMENT,
+  `idpizzas` INT(11) NOT NULL AUTO_INCREMENT,
   `nomePizza` VARCHAR(45) NOT NULL,
   `tipoPizza` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idpizzas`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 75
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -34,11 +31,11 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `bd_pizzaria`.`unidademedida`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`unidademedida` (
-  `idunidadeMedida` INT NOT NULL AUTO_INCREMENT,
+  `idunidadeMedida` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -46,10 +43,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `bd_pizzaria`.`produtos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`produtos` (
-  `idprodutos` INT NOT NULL AUTO_INCREMENT,
+  `idprodutos` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeProduto` VARCHAR(45) NOT NULL,
   `quantidade` VARCHAR(45) NOT NULL,
-  `unidadeMedida` INT NOT NULL,
+  `unidadeMedida` INT(11) NOT NULL,
   `validade` DATE NOT NULL,
   PRIMARY KEY (`idprodutos`),
   INDEX `fk_produtos_unidadeMedida1_idx` (`unidadeMedida` ASC),
@@ -57,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`produtos` (
     FOREIGN KEY (`unidadeMedida`)
     REFERENCES `bd_pizzaria`.`unidademedida` (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 71
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -65,10 +62,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `bd_pizzaria`.`pizzas_produtos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas_produtos` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `pizza_id` INT NOT NULL,
-  `produto_id` INT NOT NULL,
-  `quantidade` INT NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `pizza_id` INT(11) NOT NULL,
+  `produto_id` INT(11) NOT NULL,
+  `quantidade` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_pizza_idx` (`pizza_id` ASC),
   INDEX `fk_produto_idx` (`produto_id` ASC),
@@ -79,8 +76,119 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas_produtos` (
     FOREIGN KEY (`produto_id`)
     REFERENCES `bd_pizzaria`.`produtos` (`idprodutos`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 2461
 DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`tamanho`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`tamanho` (
+  `idtamanho` INT NOT NULL AUTO_INCREMENT,
+  `tamanho` VARCHAR(45) NOT NULL,
+  `preco` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`idtamanho`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`forma_entrega`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`forma_entrega` (
+  `idforma_entrega` INT NOT NULL AUTO_INCREMENT,
+  `tipo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idforma_entrega`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`endereco`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`endereco` (
+  `idendereco` INT NOT NULL AUTO_INCREMENT,
+  `logradouro` VARCHAR(45) NOT NULL,
+  `numero` INT NOT NULL,
+  `complemento` VARCHAR(45) NULL,
+  `bairro` VARCHAR(45) NOT NULL,
+  `cidade` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idendereco`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`clientes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`clientes` (
+  `idclientes` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `telefone` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `endereco_id` INT NOT NULL,
+  PRIMARY KEY (`idclientes`, `endereco_id`),
+  INDEX `fk_clientes_endereco1_idx` (`endereco_id` ASC),
+  CONSTRAINT `fk_clientes_endereco1`
+    FOREIGN KEY (`endereco_id`)
+    REFERENCES `bd_pizzaria`.`endereco` (`idendereco`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos` (
+  `idpedidos` INT NOT NULL AUTO_INCREMENT,
+  `data_pedido` DATE NULL,
+  `total` DECIMAL(10,2) NULL,
+  `forma_entrega_id` INT NOT NULL,
+  `clientes_id` INT NOT NULL,
+  PRIMARY KEY (`idpedidos`, `forma_entrega_id`, `clientes_id`),
+  INDEX `fk_pedidos_forma_entrega1_idx` (`forma_entrega_id` ASC),
+  INDEX `fk_pedidos_clientes1_idx` (`clientes_id` ASC),
+  CONSTRAINT `fk_pedidos_forma_entrega1`
+    FOREIGN KEY (`forma_entrega_id`)
+    REFERENCES `bd_pizzaria`.`forma_entrega` (`idforma_entrega`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_clientes1`
+    FOREIGN KEY (`clientes_id`)
+    REFERENCES `bd_pizzaria`.`clientes` (`idclientes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`pedidos_itens`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos_itens` (
+  `idpedidos_itens` INT NOT NULL AUTO_INCREMENT,
+  `quantidade` INT NOT NULL,
+  `preco_unitario` DECIMAL(10,2) NOT NULL,
+  `pedidos_idpedidos` INT NOT NULL,
+  `tamanho_idtamanho` INT NOT NULL,
+  `pizzas_idpizzas` INT(11) NOT NULL,
+  PRIMARY KEY (`idpedidos_itens`, `tamanho_idtamanho`),
+  INDEX `fk_pedidos_itens_pedidos1_idx` (`pedidos_idpedidos` ASC),
+  INDEX `fk_pedidos_itens_tamanho1_idx` (`tamanho_idtamanho` ASC),
+  INDEX `fk_pedidos_itens_pizzas1_idx` (`pizzas_idpizzas` ASC),
+  CONSTRAINT `fk_pedidos_itens_pedidos1`
+    FOREIGN KEY (`pedidos_idpedidos`)
+    REFERENCES `bd_pizzaria`.`pedidos` (`idpedidos`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_itens_tamanho1`
+    FOREIGN KEY (`tamanho_idtamanho`)
+    REFERENCES `bd_pizzaria`.`tamanho` (`idtamanho`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_itens_pizzas1`
+    FOREIGN KEY (`pizzas_idpizzas`)
+    REFERENCES `bd_pizzaria`.`pizzas` (`idpizzas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 USE `bd_pizzaria` ;
 
@@ -90,10 +198,11 @@ USE `bd_pizzaria` ;
 
 DELIMITER $$
 USE `bd_pizzaria`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `inserirPizzas`() RETURNS int
+CREATE DEFINER=`root`@`localhost` FUNCTION `inserirPizzas`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
 SET @id := 0;
+SET sql_safe_updates = 0;
 
 UPDATE pizzas SET idpizzas = @id := @id + 1;
 
@@ -551,7 +660,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `bd_pizzaria`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `inserirProdutos`() RETURNS int
+CREATE DEFINER=`root`@`localhost` FUNCTION `inserirProdutos`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
 -- Molho de tomate
@@ -776,7 +885,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `bd_pizzaria`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `inserirUnidadeMedida`() RETURNS int
+CREATE DEFINER=`root`@`localhost` FUNCTION `inserirUnidadeMedida`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
 	INSERT INTO unidademedida (idunidademedida, nome) VALUES (1, 'Gramas');
