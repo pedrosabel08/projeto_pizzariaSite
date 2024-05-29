@@ -116,6 +116,11 @@ $conn->close();
                 <form id="formAlterarProduto" action="alterar.php" method="POST">
                     <input type="hidden" name="idprodutos" id="idProdutoAlterar">
                     <button type="button" id="botaoAlterar">Alterar Item</button>
+
+                    <input type="hidden" name="nomeProdutoAlterar" id="nomeProdutoAlterar">
+                    <input type="hidden" name="qtdeProdutoAlterar" id="qtdeProdutoAlterar">
+                    <input type="hidden" name="umProdutoAlterar" id="umProdutoAlterar">
+                    <input type="hidden" name="validadeProdutoAlterar" id="validadeProdutoAlterar">
                 </form>
             </div>
         </div>

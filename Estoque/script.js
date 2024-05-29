@@ -52,6 +52,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    var botaoAlterar = document.getElementById("botaoAlterar");
+
+    botaoAlterar.addEventListener("click", function () {
+        var linhaSelecionada = document.querySelector(".selecionada");
+
+        if (linhaSelecionada) {
+            var idProdutoSelecionado = linhaSelecionada.getAttribute("data-id");
+
+            document.getElementById("idProdutoAlterar").value = idProdutoSelecionado;
+            document.getElementById('nomeProdutoAlterar').value = document.getElementById('nomeProduto').value;  
+            document.getElementById('qtdeProdutoAlterar').value = document.getElementById('quantidade').value;  
+            document.getElementById('umProdutoAlterar').value = document.getElementById('unidadeMedida').value;
+            document.getElementById('validadeProdutoAlterar').value = document.getElementById('validade').value;
+            document.getElementById("formAlterarProduto").submit();
+        } else {
+            console.log("Nenhuma linha selecionada para alterar.");
+        }
+    });
+});
+
+
 function filterTable() {
     const input = document.getElementById('filterInput');
     const filter = input.value.toLowerCase();
