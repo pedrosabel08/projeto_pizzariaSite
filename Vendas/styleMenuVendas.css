@@ -17,9 +17,10 @@ main {
     padding: 20px;
 }
 
-.main-container img.logo {
+.main-container img#logo {
     width: 120px;
     border-radius: 10px;
+    margin-left: 50px;
 }
 
 .main-container ul {
@@ -37,7 +38,7 @@ main {
 }
 
 .main-container h1 {
-    font-size: 30px;
+    font-size: 28px;
     text-align: center;
     margin: 0 auto;
 }
@@ -60,7 +61,7 @@ li a:hover {
     margin-top: 50px;
 }
 
-.main-container img.pizza {
+.main-container img#pizza{
     width: 400px;
     margin: 0 auto;
     border-radius: 10px;
