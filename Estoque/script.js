@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
             var idProdutoSelecionado = linha.getAttribute("data-id");
             $.ajax({
                 type: "GET",
-                dataType: "json",  
-                url: "http://localhost:8066/projeto_pizzariaSite/Estoque/buscaLinhaAJAX.php",
-                data: { ajid: idProdutoSelecionado },  
+                dataType: "json",
+                url: "http://localhost/projeto_pizzariaSite/Estoque/buscaLinhaAJAX.php",
+                data: { ajid: idProdutoSelecionado },
                 success: function (response) {
                     if (response.length > 0) {
-                        document.getElementById('nomeProduto').value = response[0].nomeProduto;  
-                        document.getElementById('quantidade').value = response[0].quantidade;  
+                        document.getElementById('nomeProduto').value = response[0].nomeProduto;
+                        document.getElementById('quantidade').value = response[0].quantidade;
                         document.getElementById('unidadeMedida').value = response[0].unidadeMedida;
                         document.getElementById('validade').value = response[0].validade;
                     } else {
@@ -32,9 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Linha selecionada: ID do produto = " + idProdutoSelecionado);
         });
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
     var botaoExcluir = document.getElementById("botaoExcluir");
 
     botaoExcluir.addEventListener("click", function () {
@@ -42,17 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (linhaSelecionada) {
             var idProdutoSelecionado = linhaSelecionada.getAttribute("data-id");
-
             document.getElementById("idProdutoExcluir").value = idProdutoSelecionado;
-
             document.getElementById("formExcluirProduto").submit();
         } else {
             console.log("Nenhuma linha selecionada para exclusão.");
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
     var botaoAlterar = document.getElementById("botaoAlterar");
 
     botaoAlterar.addEventListener("click", function () {
@@ -60,10 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (linhaSelecionada) {
             var idProdutoSelecionado = linhaSelecionada.getAttribute("data-id");
-
             document.getElementById("idProdutoAlterar").value = idProdutoSelecionado;
-            document.getElementById('nomeProdutoAlterar').value = document.getElementById('nomeProduto').value;  
-            document.getElementById('qtdeProdutoAlterar').value = document.getElementById('quantidade').value;  
+            document.getElementById('nomeProdutoAlterar').value = document.getElementById('nomeProduto').value;
+            document.getElementById('qtdeProdutoAlterar').value = document.getElementById('quantidade').value;
             document.getElementById('umProdutoAlterar').value = document.getElementById('unidadeMedida').value;
             document.getElementById('validadeProdutoAlterar').value = document.getElementById('validade').value;
             document.getElementById("formAlterarProduto").submit();
@@ -73,21 +66,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 function filterTable() {
     const input = document.getElementById('filterInput');
     const filter = input.value.toLowerCase();
     const table = document.getElementById('tabelaEstoque');
     const trs = table.getElementsByTagName('tr');
-    
+
     for (let i = 1; i < trs.length; i++) {
         const tds = trs[i].getElementsByTagName('td');
         let display = false;
-        
-        if (tds[0].textContent.toLowerCase().indexOf(filter) > -1) {
-            display = true;
+
+        for (let j = 0; j < tds.length; j++) {
+            if (tds[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                display = true;
+                break;
+            }
         }
-        
+
         trs[i].style.display = display ? '' : 'none';
     }
 }
