@@ -190,14 +190,11 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos_itens` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-USE `bd_pizzaria` ;
-
 -- -----------------------------------------------------
 -- function inserirPizzas
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `bd_pizzaria`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inserirPizzas`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
@@ -659,7 +656,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `bd_pizzaria`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inserirProdutos`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
@@ -901,7 +897,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `bd_pizzaria`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inserirTamanho`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
@@ -920,7 +915,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 
 DELIMITER $$
-USE `bd_pizzaria`$$
 CREATE DEFINER=`root`@`localhost` FUNCTION `inserirFormaEntrega`() RETURNS int(11)
     DETERMINISTIC
 BEGIN
