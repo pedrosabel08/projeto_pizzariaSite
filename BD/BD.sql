@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas` (
   `tipoPizza` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idpizzas`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 75
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -35,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`unidademedida` (
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -54,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`produtos` (
     FOREIGN KEY (`unidadeMedida`)
     REFERENCES `bd_pizzaria`.`unidademedida` (`idunidadeMedida`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 71
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -76,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pizzas_produtos` (
     FOREIGN KEY (`produto_id`)
     REFERENCES `bd_pizzaria`.`produtos` (`idprodutos`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2461
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -134,18 +130,22 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`clientes` (
 ENGINE = InnoDB;
 
 
+
 -- -----------------------------------------------------
--- Table `bd_pizzaria`.`pedidos`
+-- Tabela `pedidos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos` (
-  `idpedidos` INT NOT NULL AUTO_INCREMENT,
-  `data_pedido` DATE NULL,
-  `total` DECIMAL(10,2) NULL,
-  `forma_entrega_id` INT NOT NULL,
-  `clientes_id` INT NOT NULL,
-  PRIMARY KEY (`idpedidos`, `forma_entrega_id`, `clientes_id`),
+
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `idpedidos` INT(11) NOT NULL AUTO_INCREMENT,
+  `data_pedido` DATETIME NULL DEFAULT NULL,
+  `total` DECIMAL(10,2) NULL DEFAULT NULL,
+  `forma_entrega_id` INT(11) NOT NULL,
+  `clientes_id` INT(11) NOT NULL,
+  `pedidos_itens_id` INT(11) NOT NULL,
+  PRIMARY KEY (`idpedidos`),
   INDEX `fk_pedidos_forma_entrega1_idx` (`forma_entrega_id` ASC),
   INDEX `fk_pedidos_clientes1_idx` (`clientes_id` ASC),
+  INDEX `fk_pedidos_pedidos_itens1_idx` (`pedidos_itens_id` ASC),
   CONSTRAINT `fk_pedidos_forma_entrega1`
     FOREIGN KEY (`forma_entrega_id`)
     REFERENCES `bd_pizzaria`.`forma_entrega` (`idforma_entrega`)
@@ -155,41 +155,94 @@ CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos` (
     FOREIGN KEY (`clientes_id`)
     REFERENCES `bd_pizzaria`.`clientes` (`idclientes`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_pedidos_itens1`
+    FOREIGN KEY (`pedidos_itens_id`)
+    REFERENCES `bd_pizzaria`.`pedidos_itens` (`idpedidos_itens`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
 -- Table `bd_pizzaria`.`pedidos_itens`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`pedidos_itens` (
-  `idpedidos_itens` INT NOT NULL AUTO_INCREMENT,
-  `quantidade` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `pedidos_itens` (
+  `idpedidos_itens` INT(11) NOT NULL AUTO_INCREMENT,
+  `quantidade` INT(11) NOT NULL,
   `preco_unitario` DECIMAL(10,2) NOT NULL,
-  `pedidos_idpedidos` INT NOT NULL,
-  `tamanho_idtamanho` INT NOT NULL,
+  `tamanho_idtamanho` INT(11) NOT NULL,
   `pizzas_idpizzas` INT(11) NOT NULL,
-  PRIMARY KEY (`idpedidos_itens`, `tamanho_idtamanho`),
-  INDEX `fk_pedidos_itens_pedidos1_idx` (`pedidos_idpedidos` ASC),
+  PRIMARY KEY (`idpedidos_itens`),
   INDEX `fk_pedidos_itens_tamanho1_idx` (`tamanho_idtamanho` ASC),
   INDEX `fk_pedidos_itens_pizzas1_idx` (`pizzas_idpizzas` ASC),
-  CONSTRAINT `fk_pedidos_itens_pedidos1`
-    FOREIGN KEY (`pedidos_idpedidos`)
-    REFERENCES `bd_pizzaria`.`pedidos` (`idpedidos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_pedidos_itens_tamanho1`
     FOREIGN KEY (`tamanho_idtamanho`)
-    REFERENCES `bd_pizzaria`.`tamanho` (`idtamanho`)
+    REFERENCES `tamanho` (`idtamanho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pedidos_itens_pizzas1`
     FOREIGN KEY (`pizzas_idpizzas`)
-    REFERENCES `bd_pizzaria`.`pizzas` (`idpizzas`)
+    REFERENCES `pizzas` (`idpizzas`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
+-- Tabela `pedidos`
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `idpedidos` INT(11) NOT NULL AUTO_INCREMENT,
+  `data_pedido` DATE NULL DEFAULT NULL,
+  `total` DECIMAL(10,2) NULL DEFAULT NULL,
+  `forma_entrega_id` INT(11) NOT NULL,
+  `clientes_id` INT(11) NOT NULL,
+  PRIMARY KEY (`idpedidos`),
+  INDEX `fk_pedidos_forma_entrega1_idx` (`forma_entrega_id` ASC),
+  INDEX `fk_pedidos_clientes1_idx` (`clientes_id` ASC),
+  CONSTRAINT `fk_pedidos_forma_entrega1`
+    FOREIGN KEY (`forma_entrega_id`)
+    REFERENCES `forma_entrega` (`idforma_entrega`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_clientes1`
+    FOREIGN KEY (`clientes_id`)
+    REFERENCES `clientes` (`idclientes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_pedidos_itens`
+    FOREIGN KEY (`idpedidos`)
+    REFERENCES `pedidos_itens` (`pedido_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `bd_pizzaria`.`pedido_pedidos_itens`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pedido_pedidos_itens` (
+  `pedido_id` INT(11) NOT NULL,
+  `pedido_item_id` INT(11) NOT NULL,
+  PRIMARY KEY (`pedido_id`, `pedido_item_id`),
+  INDEX `fk_pedido_pedidos_itens_pedido_idx` (`pedido_id` ASC),
+  INDEX `fk_pedido_pedidos_itens_pedido_item_idx` (`pedido_item_id` ASC),
+  CONSTRAINT `fk_pedido_pedidos_itens_pedido`
+    FOREIGN KEY (`pedido_id`)
+    REFERENCES `pedidos` (`idpedidos`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedido_pedidos_itens_pedido_item`
+    FOREIGN KEY (`pedido_item_id`)
+    REFERENCES `pedidos_itens` (`idpedidos_itens`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+ALTER TABLE `pedidos`
+DROP FOREIGN KEY `fk_pedidos_pedidos_itens1`,
+DROP COLUMN `pedidos_itens_id`;
 -- -----------------------------------------------------
 -- function inserirPizzas
 -- -----------------------------------------------------
