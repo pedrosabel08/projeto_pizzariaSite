@@ -80,22 +80,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function updateSelectedFlavors() {
-        const flavorCounts = {};
-        selectedFlavors.forEach(flavor => {
-            if (flavorCounts.hasOwnProperty(flavor.name)) {
-                flavorCounts[flavor.name]++;
-            } else {
-                flavorCounts[flavor.name] = 1;
-            }
-        });
-
-        const flavorList = Object.entries(flavorCounts).map(([name, count]) => {
-            const fraction = count + "/" + maxFlavors;
+        const uniqueFlavors = Array.from(new Set(selectedFlavors.map(flavor => flavor.name)));
+        const flavorCounts = countFlavorOccurrences(selectedFlavors.map(flavor => flavor.name));
+        const totalFlavors = selectedFlavors.length;
+    
+        const flavorList = uniqueFlavors.map(name => {
+            const count = flavorCounts[name];
+            const fraction = `${count}/${totalFlavors}`;
             return `<p>${fraction} ${name}</p>`;
         });
-
+    
         selectedFlavorsContainer.innerHTML = flavorList.join('');
-
+    
         // Atualizar os IDs selecionados no campo oculto do formulário
         const selectedIds = selectedFlavors.map(flavor => flavor.id).join(',');
         selectedIdsInput.value = selectedIds;
@@ -107,5 +103,13 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             nextButton.disabled = true;
         }
+    }
+
+    function countFlavorOccurrences(flavors) {
+        const counts = {};
+        flavors.forEach(flavor => {
+            counts[flavor] = (counts[flavor] || 0) + 1;
+        });
+        return counts;
     }
 });
