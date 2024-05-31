@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styleMenuVendas.css">
-    <title>Document</title>
+    <title>Pizzaria Dom João</title>
 </head>
 
 <body>
@@ -63,14 +63,33 @@
             </ul>
         </div>
     </main>
-    <script>
-        function navigateToPizza(pizzaName, numSabores) {
-            const url = new URL('http://localhost/projeto_pizzariaSite/Vendas/pizzas.php', window.location.origin);
-            url.searchParams.set('pizza', pizzaName);
-            url.searchParams.set('num_sabores', numSabores);
-            window.location.href = url;
-        }
-    </script>
+    <div class="desenvolvido">
+        <p>Desenvolvido por PSP</p>
+        <p>SENAI-Blumenau</p>
+    </div>
+    <footer>
+        <ul>
+            <li>
+                <img src="img/casa.png" alt="casa">
+                <a href="menuVendas.html">Cardápio</a>
+            </li>
+            <li>
+                <img src="img/pedido.png" alt="pedido">
+                <a href="#">Pedidos</a>
+            </li>
+            <li>
+                <img src="img/estrela.png" alt="estrela">
+                <a href="#">Avaliações</a>
+            </li>
+            <li>
+                <img src="img/presente.png" alt="presente">
+                <a href="#">Fidelidade</a>
+            </li>
+
+        </ul>
+    </footer>
 </body>
+
+<script src="scriptMenuVendas.js"></script>
 
 </html>
