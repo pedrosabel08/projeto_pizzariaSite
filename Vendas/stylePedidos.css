@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.product {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.product h2 {
+    margin-top: 0;
+}
+
+.add-note {
+    background-color: #ffeb3b;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-control button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.quantity-control .increase {
+    background-color: #4caf50;
+}
+
+.quantity-control .quantity {
+    margin: 0 10px;
+}
+
+.price {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+}
+
+.footer .order-more, .footer .finalize-order {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.footer .order-more:hover, .footer .finalize-order:hover {
+    background-color: #d32f2f;
+}
+
+.footer .total {
+    font-size: 1.2em;
+    font-weight: bold;
+}
