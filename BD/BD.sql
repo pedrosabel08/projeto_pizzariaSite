@@ -102,12 +102,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`endereco` (
   `idendereco` INT NOT NULL AUTO_INCREMENT,
+  `cliente_id` INT NOT NULL,
   `logradouro` VARCHAR(45) NOT NULL,
   `numero` INT NOT NULL,
   `complemento` VARCHAR(45) NULL,
   `bairro` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idendereco`))
+  PRIMARY KEY (`idendereco`),
+  INDEX `fk_endereco_cliente1_idx` (`cliente_id` ASC),
+  CONSTRAINT `fk_endereco_cliente1`
+    FOREIGN KEY (`cliente_id`)
+    REFERENCES `bd_pizzaria`.`clientes` (`idclientes`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -117,16 +124,11 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bd_pizzaria`.`clientes` (
   `idclientes` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
+  `sobrenome` VARCHAR(45) NOT NULL,
   `telefone` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `endereco_id` INT NOT NULL,
-  PRIMARY KEY (`idclientes`, `endereco_id`),
-  INDEX `fk_clientes_endereco1_idx` (`endereco_id` ASC),
-  CONSTRAINT `fk_clientes_endereco1`
-    FOREIGN KEY (`endereco_id`)
-    REFERENCES `bd_pizzaria`.`endereco` (`idendereco`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `senha` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idclientes`))
 ENGINE = InnoDB;
 
 
