@@ -1,4 +1,4 @@
-body {
+body, button {
     padding: 0;
     margin: 0;
     font-family: Roboto, sans-serif;
@@ -7,6 +7,22 @@ body {
 main {
     display: grid;
     grid-template-columns: 400px 1fr 400px;
+    grid-row: auto;
+}
+
+.login {
+    grid-column: 1;
+    width: 100%;
+}
+
+.login button {
+    width: 100px;
+    height: 20px;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
 }
 
 .main-container {
