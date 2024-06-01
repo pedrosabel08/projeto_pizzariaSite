@@ -17,7 +17,7 @@ include ("conexao.php");
     <div class="header">
         <ul>
             <li>
-                <button onclick="window.history.back();"><img id="logo" src="img/seta-esquerda.png" alt="logo"></button>
+                <button onclick="window.location.href='menuVendas.html'"><img id="logo" src="img/seta-esquerda.png" alt="logo"></button>
             </li>
             <li class="center">
                 <h1 id="header-title">Detalhes da Pizza</h1>
@@ -54,6 +54,7 @@ include ("conexao.php");
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='pizza-item' data-id='" . $row['idpizzas'] . "' data-name='" . $row['nomePizza'] . "'>";
+                echo "<h3>" . $row['idpizzas'] . "</h3>";
                 echo "<h3>" . $row['nomePizza'] . "</h3>";
                 echo "<p>Ingredientes: " . $row['ingredientes'] . "</p>";
                 echo "<div class='buttons'>";
@@ -69,32 +70,35 @@ include ("conexao.php");
     </div>
     </div>
     <div id="doces" class="tab-content">
-        <div class="pizza-item">
-            <?php
-            $sql = "SELECT p.idpizzas, p.nomePizza, GROUP_CONCAT(pr.nomeProduto SEPARATOR ', ') AS ingredientes
+        <?php
+        $sql = "SELECT p.idpizzas, p.nomePizza, GROUP_CONCAT(pr.nomeProduto SEPARATOR ', ') AS ingredientes
             FROM pizzas p
             JOIN pizzas_produtos pp ON p.idpizzas = pp.pizza_id
             JOIN produtos pr ON pp.produto_id = pr.idprodutos
             WHERE p.tipoPizza = 'doce'
             GROUP BY p.idpizzas";
-            $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
 
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<div class='pizza-item' data-id='" . $row['idpizzas'] . "' data-name='" . $row['nomePizza'] . "'>";
-                    echo "<h3>" . $row['nomePizza'] . "</h3>";
-                    echo "<p>Ingredientes: " . $row['ingredientes'] . "</p>";
-                    echo "<div class='buttons'>";
-                    echo "<button class='add-button'>+</button>";
-                    echo "<button class='remove-button'>-</button>";
-                    echo "</div>";
-                    echo "</div>";
-                }
-            } else {
-                echo "Nenhuma pizza encontrada.";
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='pizza-item' data-id='" . $row['idpizzas'] . "' data-name='" . $row['nomePizza'] . "'>";
+                echo "<h3>" . $row['idpizzas'] . "</h3>";
+                echo "<h3>" . $row['nomePizza'] . "</h3>";
+                echo "<p>Ingredientes: " . $row['ingredientes'] . "</p>";
+                echo "<div class='buttons'>";
+                echo "<button class='add-button'>+</button>";
+                echo "<button class='remove-button'>-</button>";
+                echo "</div>";
+                echo "</div>";
             }
-            ?>
-        </div>
+        } else {
+            echo "Nenhuma pizza encontrada.";
+        }
+        ?>
+    </div>
+    <div class="desenvolvido">
+        <p>Desenvolvido por PSP</p>
+        <p>SENAI-Blumenau</p>
     </div>
     <div class="selection-summary">
         <form action="inserirPedidos.php" method="POST">

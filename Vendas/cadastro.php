@@ -1,6 +1,5 @@
 <?php
-session_start();
-require 'conexao.php';
+include ('conexao.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
@@ -9,17 +8,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $sql = "INSERT INTO clientes (nome, sobrenome, telefone, email, senha) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $nome, $sobrenome, $telefone, $email, $senha);
+    $checkEmailSql = "SELECT idclientes FROM clientes WHERE email = ?";
+    $checkStmt = $conn->prepare($checkEmailSql);
+    $checkStmt->bind_param("s", $email);
+    $checkStmt->execute();
+    $checkStmt->store_result();
 
-    if ($stmt->execute()) {
-        echo "<script>alert('Cadastro de cliente realizado com sucesso!');</script>";
-        header("Location: endereco.php?cliente_id=" . $conn->insert_id);
+    if ($checkStmt->num_rows > 0) {
+        echo "<script>alert('Email já cadastrado. Por favor, use outro email.');window.location.href='login_cadastro.html';</script>";
     } else {
-        echo "Erro ao realizar cadastro: " . $stmt->error;
+        $sql = "INSERT INTO clientes (nome, sobrenome, telefone, email, senha) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $nome, $sobrenome, $telefone, $email, $senha);
+
+        if ($stmt->execute()) {
+            $_SESSION['message'] = "Cadastro de cliente realizado com sucesso!";
+            header("Location: endereco.php?cliente_id=" . $stmt->insert_id);
+            exit();
+        } else {
+            echo "Erro ao realizar cadastro: " . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
+    $checkStmt->close();
     $conn->close();
 }

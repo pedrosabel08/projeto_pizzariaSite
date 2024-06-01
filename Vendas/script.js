@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
         selectedFlavorsContainer.innerHTML = flavorList.join('');
     
-        // Atualizar os IDs selecionados no campo oculto do formulário
         const selectedIds = selectedFlavors.map(flavor => flavor.id).join(',');
         selectedIdsInput.value = selectedIds;
     }

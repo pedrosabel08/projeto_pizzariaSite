@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleMenuVendas.css">
+    <link rel="stylesheet" type="text/css" href="styleMenuVendas.css">
     <title>Pizzaria Dom João</title>
 </head>
 
 <body>
     <main>
         <div class="login">
-            <button id="login" onclick="window.location.href='login_cadastro.html'">Login</button>
+            <img src="img/usuario.png" alt="usuario">
+            <button id="login-button" onclick="window.location.href='login_cadastro.html'">Login</button>
+            <span id="greeting" style="display: none;">Olá, <span id="cliente-nome"></span></span>
         </div>
         <div class="main-container">
             <ul>
@@ -91,6 +93,9 @@
 
         </ul>
     </footer>
+    <div id="greeting" style="display: none;">
+        <h2>Olá, <span id="cliente-nome"></span></h2>
+    </div>
 </body>
 
 <script src="scriptMenuVendas.js"></script>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $forma_entrega_id = 1; // Defina conforme necessário
-        $clientes_id = 1; // Defina conforme necessário
+        $clientes_id = 3; // Defina conforme necessário
 
         $sqlPedido = "INSERT INTO pedidos (data_pedido, total, forma_entrega_id, clientes_id) VALUES (NOW(), ?, ?, ?)";
         

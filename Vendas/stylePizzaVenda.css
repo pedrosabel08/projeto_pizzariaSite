@@ -41,10 +41,6 @@ body {
     font-weight: bold;
 }
 
-.header ul li button:hover {
-    background-color: #d1322f;
-}
-
 .header h1 {
     margin-block-start: 0;
     margin-block-end: 0;
@@ -113,6 +109,7 @@ body {
 }
 
 .pizza-item h3 {
+    display: inline-block;
     margin: 0;
     font-size: 1.2em;
 }
@@ -125,7 +122,6 @@ body {
     color: #f44336;
     font-weight: bold;
 }
-
 
 .pizza-item {
     border: 1px solid #ccc;
@@ -169,6 +165,7 @@ body {
 .add-button:hover {
     background-color: rgb(241, 240, 240);
 }
+
 .remove-button:hover {
     background-color: rgb(241, 240, 240);
 }
@@ -199,3 +196,19 @@ body {
     cursor: pointer;
 }
 
+.desenvolvido {
+    padding: 50px;
+    padding-bottom: 100px;
+    background-color: #e9e8e8;
+}
+
+.desenvolvido p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}

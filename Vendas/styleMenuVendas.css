@@ -1,4 +1,5 @@
-body, button {
+body,
+button {
     padding: 0;
     margin: 0;
     font-family: Roboto, sans-serif;
@@ -7,22 +8,36 @@ body, button {
 main {
     display: grid;
     grid-template-columns: 400px 1fr 400px;
-    grid-row: auto;
 }
 
 .login {
-    grid-column: 1;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    padding: 10px;
+    height: 30px;
+}
+
+span {
+    font-size: 18px;
 }
 
 .login button {
-    width: 100px;
-    height: 20px;
-    font-size: 18px;
-    padding: 10px;
-    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px 20px;
     border: none;
-    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 7px 0.5px rgba(0, 0, 0, 0.4);
+}
+
+.login img {
+    margin-right: 10px
 }
 
 .main-container {
