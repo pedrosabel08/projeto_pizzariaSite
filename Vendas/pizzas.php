@@ -2,7 +2,6 @@
 include ("conexao.php");
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -17,7 +16,8 @@ include ("conexao.php");
     <div class="header">
         <ul>
             <li>
-                <button onclick="window.location.href='menuVendas.html'"><img id="logo" src="img/seta-esquerda.png" alt="logo"></button>
+                <button onclick="window.location.href='menuVendas.html'"><img id="logo" src="img/seta-esquerda.png"
+                        alt="logo"></button>
             </li>
             <li class="center">
                 <h1 id="header-title">Detalhes da Pizza</h1>
@@ -104,6 +104,8 @@ include ("conexao.php");
         <form action="inserirPedidos.php" method="POST">
             <input type="hidden" name="selected_ids" id="selected-ids">
             <input type="hidden" name="total_price" id="total-price-value">
+            <input type="hidden" name="cliente_id" id="cliente-id">
+            <input type="hidden" name="pizza_name" id="pizza-name">
             <p id="num-sabores2"></p>
             <div id="selected-flavors"></div>
             <p>Total <span id="total-price"></span></p>

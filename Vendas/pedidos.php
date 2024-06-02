@@ -19,31 +19,33 @@
                 include ("conexao.php");
 
                 $sql = "SELECT
-                p.idpedidos,
-                p.data_pedido,
-                p.total,
-                pi.preco_unitario,
-                z.nomePizza,
-                GROUP_CONCAT(DISTINCT pr.nomeProduto SEPARATOR ', ') AS ingredientes
-            FROM
-                pedidos p
-            JOIN
-                pedido_pedidos_itens ppi ON p.idpedidos = ppi.pedido_id
-            JOIN
-                pedidos_itens pi ON ppi.pedido_item_id = pi.idpedidos_itens
-            JOIN
-                pizzas z ON pi.pizzas_idpizzas = z.idpizzas
-            JOIN
-                pizzas_produtos pp ON z.idpizzas = pp.pizza_id
-            JOIN
-                produtos pr ON pp.produto_id = pr.idprodutos
-            WHERE
-                p.idpedidos = (SELECT MAX(idpedidos) FROM pedidos)
-            GROUP BY
-                p.idpedidos, pi.preco_unitario, z.nomePizza
-            ORDER BY
-                pi.idpedidos_itens";
-
+            p.idpedidos,
+            p.data_pedido,
+            p.total,
+            pi.preco_unitario,
+            pz.nomePizza AS nomePizza,
+            t.tamanho AS tamanho,
+            GROUP_CONCAT(DISTINCT pr.nomeProduto SEPARATOR ', ') AS ingredientes
+        FROM
+            pedidos p
+        JOIN
+            pedido_pedidos_itens ppi ON p.idpedidos = ppi.pedido_id
+        JOIN
+            pedidos_itens pi ON ppi.pedido_item_id = pi.idpedidos_itens
+        JOIN
+            pizzas pz ON pi.pizzas_idpizzas = pz.idpizzas
+        JOIN
+            pizzas_produtos pp ON pz.idpizzas = pp.pizza_id
+        JOIN
+            produtos pr ON pp.produto_id = pr.idprodutos
+        JOIN
+            tamanho t ON pi.tamanho_idtamanho = t.idtamanho
+        WHERE
+            p.idpedidos = (SELECT MAX(idpedidos) FROM pedidos)
+        GROUP BY
+            p.idpedidos, pi.preco_unitario, pz.nomePizza, t.tamanho
+        ORDER BY
+            pi.idpedidos_itens";
                 $result = mysqli_query($conn, $sql);
                 $totalPedido = 0;
 
@@ -59,12 +61,13 @@
                             echo "<h2>Pedido #" . $row['idpedidos'] . "</h2>";
                             echo "<p>Data do Pedido: " . $row['data_pedido'] . "</p>";
                             echo "<p>Total: R$ " . number_format($row['total'], 2, ',', '.') . "</p>";
+                            echo "<p><strong>Tamanho da Pizza: " . $row['tamanho'] . "</strong></p>"; // Alterado de 'Pizza' para 'Tamanho da Pizza'
                             echo "<ul>";
                             $pedidoAtual = $row['idpedidos'];
                             $totalPedido += $row['total'];
                         }
                         echo "<li>";
-                        echo "<p><strong>Pizza: " . $row['nomePizza'] . "</strong></p>";
+                        echo "<p>Sabor: " . $row['nomePizza'] . "</p>"; // Adicionado o sabor da pizza
                         echo "<p>Ingredientes: " . $row['ingredientes'] . "</p>";
                         echo "</li>";
                     }

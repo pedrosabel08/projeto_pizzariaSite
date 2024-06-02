@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: menuVendas.html?cliente_id=" . $row['idclientes'] . "&nome=" . urlencode($row['nome']));
         exit();
     } else {
-        echo "<script>alert('Email ou senha incorretos.');</script>";
+        echo "<script>alert('Email ou senha incorretos.');window.location.href='login_cadastro.html';</script>";
     }
 
     $stmt->close();

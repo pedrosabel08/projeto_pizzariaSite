@@ -2,26 +2,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const pizzaName = params.get('pizza');
     const numSabores = params.get('num_sabores');
+    const clienteId = params.get('cliente_id');
+
     if (pizzaName) {
         const headerTitle = document.getElementById('header-title');
-        const price = document.getElementById('total-price')
-        const totalPriceInput = document.getElementById('total-price-value')
+        const price = document.getElementById('total-price');
+        const totalPriceInput = document.getElementById('total-price-value');
+        const clientIdInput = document.getElementById('cliente-id');
+        const pizzaNameInput = document.getElementById('pizza-name');
 
         let pizzaPrice;
 
         if (pizzaName == 'PIZZA GIGANTE') {
             pizzaPrice = 87.90;
-        }
-
-        if (pizzaName == 'PIZZA GRANDE') {
+        } else if (pizzaName == 'PIZZA GRANDE') {
             pizzaPrice = 76.90;
-        }
-
-        if (pizzaName == 'PIZZA MÉDIA') {
+        } else if (pizzaName == 'PIZZA MÉDIA') {
             pizzaPrice = 58.90;
-        }
-
-        if (pizzaName == 'PIZZA BABY') {
+        } else if (pizzaName == 'PIZZA BABY') {
             pizzaPrice = 29.90;
         }
 
@@ -32,6 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (price && totalPriceInput) {
             price.textContent = 'R$ ' + pizzaPrice.toFixed(2);
             totalPriceInput.value = pizzaPrice.toFixed(2);
+        }
+
+        if (clientIdInput) {
+            clientIdInput.value = clienteId;
+        }
+
+        if (pizzaNameInput) {
+            pizzaNameInput.value = pizzaName;
         }
 
         const numSaboresElements = document.querySelectorAll('#num-sabores, #num-sabores2');
