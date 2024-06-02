@@ -43,12 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        $forma_entrega_id = 1;
 
-        $sqlPedido = "INSERT INTO pedidos (data_pedido, total, forma_entrega_id, clientes_id) VALUES (NOW(), ?, ?, ?)";
+        $sqlPedido = "INSERT INTO pedidos (data_pedido, total, clientes_id) VALUES (NOW(), ?, ?)";
 
         if ($stmtPedido = mysqli_prepare($conn, $sqlPedido)) {
-            mysqli_stmt_bind_param($stmtPedido, "dii", $totalPrice, $forma_entrega_id, $clienteId);
+            mysqli_stmt_bind_param($stmtPedido, "di", $totalPrice, $clienteId);
             mysqli_stmt_execute($stmtPedido);
             $pedidoId = mysqli_insert_id($conn);
             mysqli_stmt_close($stmtPedido);
