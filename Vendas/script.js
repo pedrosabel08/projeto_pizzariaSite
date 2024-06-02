@@ -89,15 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const uniqueFlavors = Array.from(new Set(selectedFlavors.map(flavor => flavor.name)));
         const flavorCounts = countFlavorOccurrences(selectedFlavors.map(flavor => flavor.name));
         const totalFlavors = selectedFlavors.length;
-    
+
         const flavorList = uniqueFlavors.map(name => {
             const count = flavorCounts[name];
             const fraction = `${count}/${totalFlavors}`;
             return `<p>${fraction} ${name}</p>`;
         });
-    
+
         selectedFlavorsContainer.innerHTML = flavorList.join('');
-    
+
         const selectedIds = selectedFlavors.map(flavor => flavor.id).join(',');
         selectedIdsInput.value = selectedIds;
     }
@@ -118,3 +118,4 @@ document.addEventListener("DOMContentLoaded", function () {
         return counts;
     }
 });
+
